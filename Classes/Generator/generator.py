@@ -11,13 +11,13 @@ from Classes.Email.email import Email
 from Classes.Password.password import Password
 
 def generator():
-    print("                                 _             ")
+    print(f"{Fore.GREEN}                                 _             ")
     print("  __ _  ___ _ __   ___ _ __ __ _| |_ ___  _ __ ")
     print(" / _` |/ _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|")
     print("| (_| |  __/ | | |  __/ | | (_| | || (_) | |   ")
     print(" \__, |\___|_| |_|\___|_|  \__,_|\__\___/|_|   ")
     print(" |___/                                         ")
-    print("-----------------------------------------------")
+    print(f"-----------------------------------------------{Fore.RESET}")
 
 def details():
     print("     _      _        _ _     ")
@@ -82,19 +82,23 @@ class Generator:
         print(Fore.RED)
         clear_screen()
         generator()
-        print("Seed: [1] YES | [2] NO")
-        if int(input("Choice: ")) == 1:
+        print(f"Seed: {Fore.GREEN}[1] YES | {Fore.RED}[2] NO | {Fore.CYAN}[3] RANDOM{Fore.RESET}")
+        choice1 = int(input("Choice: "))
+        if choice1 == 1:
             random.seed(input("Seed: "))
-        clear_screen()
-        generator()
-        print("Gender: [1] MALE | [2] FEMALE | [3] RANDOM")
-        match int(input("Choice: ")):
-            case 1:
-                gender = "Male"
-            case 2:
-                gender = "Female"
-            case _:
-                gender = random.choice(["Male", "Female"])
+        if not (choice1 == 3):
+            clear_screen()
+            generator()
+            print(f"Gender: {Fore.CYAN}[1] MALE | {Fore.MAGENTA}[2] FEMALE | {Fore.RED}[3] RANDOM{Fore.RESET}")
+            match int(input("Choice: ")):
+                case 1:
+                    gender = "Male"
+                case 2:
+                    gender = "Female"
+                case _:
+                    gender = random.choice(["Male", "Female"])
+        else:
+            gender = random.choice(["Male", "Female"])
         person = self.generate_person(gender)
         clear_screen()
         print(Fore.CYAN if gender == "Male" else Fore.MAGENTA)
